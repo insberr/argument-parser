@@ -1,0 +1,7 @@
+{
+	"extends": "@aero",
+	"rules": {
+		"consistent-return": "off",
+		"prefer-const": "off"
+	}
+}
