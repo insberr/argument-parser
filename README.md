@@ -1,16 +1,23 @@
 > *Discord command argument parser*  
 > *Working progress*
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/SpiderGamin/djs-argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/SpiderGamin/djs-argument-parser/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/SpiderGamin/djs-argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/SpiderGamin/djs-argument-parser/context:javascript)
+
 # djs-argument-parser
 Discord bot command argument parser since none exist.  
 
-[Documentation]() (none yet)
+[Documentation]() (Not created yet [Looking for help on this])
 
-### Plans
-- Add a command handler
 
-## Example
-Files for the exaples can be found in `src/tests/test.js`  
+### To Do
+- Make a support discord server
+- Add all types
+
+## Parser Example
+Files for the exaples can be found in [`/src/tests/`](/src/tests/)
+
+This example can be found in [`/src/tests/Parser`](/src/tests/Parser/)  
 Bot file (Usually the `index.js` file) 
 ```js
 // Discord.js
@@ -18,7 +25,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // Argument parser
-const { Parser } = require('../../index.js');
+const { Parser } = require('djs-argument-parser');
 const parser = new Parser(client, {
 	prefix: '!' // Default prefix (optional)
 });
@@ -40,9 +47,9 @@ client.on('message', async (msg) => {
 
 	/*
 		parser.parse(message, commandConfig, prefix?)
-		prefix, useful if you have custom guild prefixes. If no prefix is defined, the default prefix (above) will be used.
+		prefix -> useful if you have custom guild prefixes. If no prefix is defined, the default prefix (above) will be used.
 
-		input message '!test edit no true'
+		Example: input message -> '!test edit no true'
 	*/
 	let parsed = await parser.parse(msg, cmdConfig).then((value) => value);
 
@@ -71,7 +78,7 @@ client.login(TOKEN);
 
 ```
 
-The `commands/test.js` file:
+The [`/src/Parser/commands/test.js`](/src/tests/Parser/commands/test.js) file:  
 ```js
 module.exports = class Test {
 
@@ -103,7 +110,7 @@ module.exports = class Test {
 		};
 	}
 
-	//  msg, args (named as they key), error, other (has stuff like the prefix used, command and more), parser (parser full contents)
+	//  msg, args (named as they key), error, other (has stuff like the prefix used, command and more), parsed (parsed full contents)
 	async run(msg, { configAction, configOption, setting }, error, other, parsed) {
 		if (error) {
 			msg.channel.send(error);
@@ -116,9 +123,12 @@ module.exports = class Test {
 };
 ```
 
+Note: The command handler may be moved to a new git repo since it is not part of the argument parser.
+
+
 ## Maintainers
 - [SpiderGamin](https://github.com/SpiderGamin/)
 
 
 ## License
-**djs-command-parser** is released under the MIT License. Read [here](/LICENSE) for more information.
+**djs-argument-parser** is released under the MIT License. Read [here](/LICENSE) for more information.

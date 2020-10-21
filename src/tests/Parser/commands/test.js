@@ -34,6 +34,21 @@ module.exports = class Test {
 			msg.channel.send(error);
 			return console.log(`ERROR: ${error}\nParsed: ${parsed}`);
 		}
+		switch (configAction) {
+			case 'edit': {
+				return msg.channel.send('edit');
+			}
+			case 'show': {
+				return msg.channel.send('show');
+			}
+			case 'reset': {
+				return msg.channel.send('reset');
+			}
+			default: {
+				if (configAction.error) return msg.channel.send('Error');
+				msg.channel.send('no arg provided');
+			}
+		}
 		await msg.channel.send(`Action: ${configAction}\nOption: ${configOption}\nSetting: ${setting}\nOther: ${other}`);
 		return;
 	}

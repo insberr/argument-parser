@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { TOKEN } = require('../../config.json');
+const { TOKEN } = require('../../../config.json');
 
 const fs = require('fs');
 
-const { Parser } = require('../../index.js');
+const { Parser } = require('../../../index.js');
 const parser = new Parser(client, {
 	prefix: '&'
 });
@@ -48,9 +48,13 @@ client.on('message', async (msg) => {
 	let command = new Command();
 	let { cmdConfig } = command;
 
-	let parsed = await parser.parse(msg, cmdConfig).then((value) => value);
+	let parsed = await parser.parse(msg, cmdConfig)
+		.then((value) => value)
+		// eslint-disable-next-line arrow-body-style
+		.catch((err) => {
+			return console.log(err);
+		});
 	let { args, error, other } = parsed;
-	await msg.channel.send(`CLIENT.ON MSG\n\`\`\`json\n${JSON.stringify(parsed, null, 4)}\n\`\`\``);
 	await command.run(msg, args, error, other, parsed);
 	return;
 });

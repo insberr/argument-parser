@@ -1,12 +1,16 @@
+const JSON5 = require('json5');
+
 module.exports = class Parser {
 
 	/**
+	 * The parser class
 	 * @param {Object} client Discord client
 	 * @param {Object} options Parser options
+	 * @param {string} options.prefix Default prefix
 	 */
 	constructor(client, options) {
 		this.client = client;
-		this.prefix = options?.prefix;
+		this.prefix = options?.prefix || null;
 	}
 	getCommandUsed(content, prefix, cmdConf) {
 		let usedReg = RegExp(`${prefix} *?(${cmdConf.name} *|${cmdConf.aliases.join(' *|')} *)`);
@@ -34,24 +38,19 @@ module.exports = class Parser {
 		const argStructure = cmdConf.args;
 		const commandName = cmdConf.name;
 
+		if (prefix === null || prefix === undefined) throw Error('No prefix was defined');
+
 		const { usedReg } = await this.getCommandUsed(content, prefix, cmdConf);
 
 		const splits = await this.regSplitter(content, usedReg);
-		if (splits.every.length <= 0) return { error: 'No arguments provided' };
+		if (splits.every.length <= 0) return { error: 'No args provided', noArgs: true };
 
 		let parsedArgs = {};
 		await argStructure.forEach((arg, index) => {
 			let value = this.typeChecker(splits, arg, index);
 			parsedArgs[arg.key] = value;
 		});
-		return {
-			error: false,
-			args: parsedArgs,
-			other: {
-				cmd: commandName,
-				prefix: prefix
-			}
-		};
+		return this.returnParsed(parsedArgs, commandName, prefix);
 	}
 	typeChecker(splits, arg, index) {
 		switch (arg.type.toLowerCase()) {
@@ -62,18 +61,33 @@ module.exports = class Parser {
 				return parseInt(splits.all[index]);
 			}
 			case 'float': case 'number': {
-				return parseFloat(splits.all[index]);
+				try {
+					return parseFloat(splits.all[index]);
+				} catch (err) { return undefined; }
 			}
 			case 'bool': case 'boolean': {
+				if (splits.all[index].toLowerCase !== 'true' || splits.all[index].toLowerCase !== 'false') return undefined;
 				return Boolean(splits.all[index]);
 			}
 			case 'json': {
-				return JSON.parse(splits.all[index]);
+				try {
+					return JSON5.parse(splits.all[index]);
+				} catch (err) { return { error: err, expected: 'json', value: splits.all[index] }; }
 			}
 			default: {
 				return undefined;
 			}
 		}
+	}
+	returnParsed(parsedArgs, commandName, prefix, errors) {
+		return {
+			error: errors || false,
+			args: parsedArgs,
+			other: {
+				cmd: commandName,
+				prefix: prefix
+			}
+		};
 	}
 
 };
