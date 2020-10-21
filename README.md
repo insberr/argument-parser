@@ -9,6 +9,7 @@ Discord bot command argument parser since none exist.
 
 [Documentation]() (Not created yet [Looking for help on this])
 
+Warning: Some features are not tested
 
 ### To Do
 - Make a support discord server
