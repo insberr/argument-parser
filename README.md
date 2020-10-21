@@ -4,7 +4,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/SpiderGamin/djs-argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/SpiderGamin/djs-argument-parser/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/SpiderGamin/djs-argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/SpiderGamin/djs-argument-parser/context:javascript)
 
-# djs-argument-parser
+# argument-parser
 Discord bot command argument parser since none exist.  
 
 [Documentation]() (Not created yet [Looking for help on this])
@@ -132,4 +132,4 @@ Note: The command handler may be moved to a new git repo since it is not part of
 
 
 ## License
-**djs-argument-parser** is released under the MIT License. Read [here](/LICENSE) for more information.
+**argument-parser** is released under the MIT License. Read [here](/LICENSE) for more information.
