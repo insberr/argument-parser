@@ -35,9 +35,9 @@ client.on('ready', () => {
 
 client.on('message', async (msg) => {
 	if (msg.author.bot) return;
-	if (!msg.content.startsWith('&')) return;
+	if (!msg.content.startsWith(parser.prefix)) return;
 	let cmd = '';
-	let used = msg.content.split(' ')[0].replace('&', '');
+	let used = msg.content.split(' ')[0].replace(parser.prefix, '');
 	if (client.commands.has(used)) {
 		cmd = client.commands.get(used).name;
 	} else if (client.aliases.has(used)) {
