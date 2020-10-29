@@ -36,11 +36,10 @@ module.exports = class Parser {
 		const { content } = msg;
 		prefix = prefix || this.prefix;
 		const argStructure = cmdConf.args;
-		const commandName = cmdConf.name;
 
 		if (prefix === null || prefix === undefined) throw Error('No prefix was defined');
 
-		const { usedReg } = await this.getCommandUsed(content, prefix, cmdConf);
+		const { usedReg, usedCommand } = await this.getCommandUsed(content, prefix, cmdConf);
 
 		const splits = await this.regSplitter(content, usedReg);
 		if (splits.every.length <= 0) return { error: 'No args provided', noArgs: true };
@@ -50,7 +49,7 @@ module.exports = class Parser {
 			let value = this.typeChecker(splits, arg, index);
 			parsedArgs[arg.key] = value;
 		});
-		return this.returnParsed(parsedArgs, commandName, prefix);
+		return this.returnParsed(parsedArgs, usedCommand, cmdConf, prefix, splits);
 	}
 	typeChecker(splits, arg, index) {
 		switch (arg.type.toLowerCase()) {
@@ -63,7 +62,7 @@ module.exports = class Parser {
 			case 'float': case 'number': {
 				try {
 					return parseFloat(splits.all[index]);
-				} catch (err) { return undefined; }
+				} catch (err) { return { error: err, expected: 'float', value: splits.all[index] }; }
 			}
 			case 'bool': case 'boolean': {
 				if (splits.all[index].toLowerCase !== 'true' || splits.all[index].toLowerCase !== 'false') return undefined;
@@ -79,13 +78,15 @@ module.exports = class Parser {
 			}
 		}
 	}
-	returnParsed(parsedArgs, commandName, prefix, errors) {
+	returnParsed(parsedArgs, commandUsed, cmdConfig, prefix, splits, error) {
 		return {
-			error: errors || false,
+			error: error || false,
 			args: parsedArgs,
 			other: {
-				cmd: commandName,
-				prefix: prefix
+				cmdConfig: cmdConfig,
+				cmdUsed: commandUsed,
+				prefix: prefix,
+				parsedValues: splits
 			}
 		};
 	}

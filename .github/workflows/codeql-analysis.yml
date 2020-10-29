@@ -3,16 +3,23 @@
 #
 # You may wish to alter this file to override the set of languages analyzed,
 # or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+# ******** NOTE ********
+
 name: "CodeQL"
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [main]
+    branches: [ main ]
   schedule:
-    - cron: '0 16 * * 5'
+    - cron: '25 21 * * 6'
 
 jobs:
   analyze:
@@ -22,9 +29,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Override automatic language detection by changing the below list
-        # Supported options are ['csharp', 'cpp', 'go', 'java', 'javascript', 'python']
-        language: ['javascript']
+        language: [ 'javascript' ]
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
         # Learn more...
         # https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#overriding-automatic-language-detection
 

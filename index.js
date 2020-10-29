@@ -1,7 +1,5 @@
-const Parser = require('./src/arguments/Parser.js');
-const Handler = require('./src/commands/Handler.js');
+const Parser = require('./src/Parser.js');
 
 module.exports = {
-	Parser,
-	Handler
+	Parser
 };

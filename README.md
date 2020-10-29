@@ -1,25 +1,22 @@
 > *Discord command argument parser*  
 > *Working progress*
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/SpiderGamin/djs-argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/SpiderGamin/djs-argument-parser/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/SpiderGamin/djs-argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/SpiderGamin/djs-argument-parser/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/djs-tools/argument-parser/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/djs-tools/argument-parser/context:javascript)
 
 # argument-parser
 Discord bot command argument parser since none exist.  
 
 [Documentation]() (Not created yet [Looking for help on this])
 
-Warning: Some features are not tested
+Requires Nodejs version 14.13.1 or higher
 
-### To Do
-- Make a support discord server
-- Add all types
 
 ## Parser Example
-Files for the exaples can be found in [`/src/tests/`](/src/tests/)
+Files for the examples can be found in [`/src/tests/`](/src/tests/)
 
 This example can be found in [`/src/tests/Parser`](/src/tests/Parser/)  
-Bot file (Usually the `index.js` file) 
+Bot file (Usually the `index.js` file)  
 ```js
 // Discord.js
 const Discord = require('discord.js');
@@ -28,51 +25,51 @@ const client = new Discord.Client();
 // Argument parser
 const { Parser } = require('djs-argument-parser');
 const parser = new Parser(client, {
-	prefix: '!' // Default prefix (optional)
+  prefix: '!' // Default prefix (optional)
 });
 
-const prefix = '!';
+const prefix = parser.prefix;
 
 client.on('ready', () => {
-	console.log('Bot Ready as ', client.user.username);
+  console.log('Bot Ready as ', client.user.username);
 });
 
 client.on('message', async (msg) => {
-	if (msg.author.bot) return;
-	if (!msg.content.startsWith(prefix)) return;
-	
-	// Require the command (In this case the test command)
-	let Command = require(`./commands/test.js`);
-	let command = new Command();
-	let { cmdConfig } = command;
-
-	/*
-		parser.parse(message, commandConfig, prefix?)
-		prefix -> useful if you have custom guild prefixes. If no prefix is defined, the default prefix (above) will be used.
-
-		Example: input message -> '!test edit no true'
-	*/
-	let parsed = await parser.parse(msg, cmdConfig).then((value) => value);
-
-	let { args, error, other } = parsed;
-	/*
-		output: 
-		{
-			"error": false,
-			"args": {
-				"configAction": "edit",
-				"configOption": "no",
-				"setting": true
-			},
-			"other": {
-				"cmd": "test",
-				"prefix": "&"
-			}
-		}
-	*/
-	// run the command
-	await command.run(msg, args, error, other, parsed);
-	return;
+  if (msg.author.bot) return;
+  if (!msg.content.startsWith(prefix)) return;
+  
+  // Require the command (In this case the test command)
+  let Command = require(`./commands/test.js`);
+  let command = new Command();
+  let { cmdConfig } = command;
+  
+  /*
+    parser.parse(message, commandConfig, prefix?)
+	prefix -> useful if you have custom guild prefixes. If no prefix is defined, the default prefix (above) will be used.
+  
+  	Example: input message -> '!test edit no true'
+  */
+  let parsed = await parser.parse(msg, cmdConfig).then((value)   => value);
+  
+  let { args, error, other } = parsed;
+  /*
+  	output: 
+  	{
+  	  "error": false,
+  	  "args": {
+  		"configAction": "edit",
+  		"configOption": "no",
+  		"setting": true
+  	  },
+  	  "other": {
+  		"cmd": "test",
+  		"prefix": "!"
+  	  }
+  	}
+  */
+  // run the command
+  await command.run(msg, args, error, other, parsed);
+  return;
 });
 
 client.login(TOKEN);
@@ -85,8 +82,8 @@ module.exports = class Test {
 
 	constructor() {
 		this.cmdConfig = {
-			name: 'test',
-			aliases: ['testing'],
+			name: 'test', // Command name (required)
+			aliases: ['testing'], // Aliases (other uses for the command) (optional)
 			description: 'Test the parser',
 			useage: 'action option setting value',
 			args: [
@@ -124,11 +121,8 @@ module.exports = class Test {
 };
 ```
 
-Note: The command handler may be moved to a new git repo since it is not part of the argument parser.
-
-
 ## Maintainers
-- [SpiderGamin](https://github.com/SpiderGamin/)
+- [Insberr (AKA SpiderGamin)](https://github.com/Insberr/)
 
 
 ## License

@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { TOKEN } = require('../../../config.json');
+const { TOKEN } = require('./config.json');
 
 const fs = require('fs');
+const path = require('path');
 
 const { Parser } = require('../../../index.js');
 const parser = new Parser(client, {
@@ -11,7 +12,7 @@ const parser = new Parser(client, {
 
 
 var commands = [];
-var files = fs.readdirSync('./src/tests/commands/');
+var files = fs.readdirSync(path.join(__dirname, '/commands/'));
 files.forEach((command) => {
 	let Command = require(`./commands/${command}`);
 	let { cmdConfig } = new Command();

@@ -1,26 +1,27 @@
 {
-	"name": "djs-argument-parser",
+	"name": "argument-parser",
 	"version": "0.0.1",
-	"description": "",
+	"description": "Discord bot command argument parser. Splits the message into the needed arguments.",
 	"main": "index.js",
 	"scripts": {
-		"test": "node src/tests/index.test.js"
+		"p-test": "node src/tests/Parser/test.js"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/SpiderGamin/djs-argument-parser.git"
+		"url": "git+https://github.com/djs-tools/argument-parser.git"
 	},
-	"author": "SpiderGamin",
+	"author": "Insberr",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/SpiderGamin/djs-argument-parser/issues"
+		"url": "https://github.com/djs-tools/argument-parser/issues"
 	},
-	"homepage": "https://github.com/SpiderGamin/djs-argument-parser#readme",
+	"homepage": "https://github.com/djs-tools/argument-parser#readme",
 	"dependencies": {
-		"@aero/eslint-config": "git+https://git.farfrom.earth/aero/forks/eslint-config-aero.git",
-		"discord.js": "^12.3.1",
-		"eslint": "^7.11.0",
 		"json5": "^2.1.3",
 		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"discord.js": "^12.3.1",
+		"eslint": "^7.11.0"
 	}
 }

@@ -23,7 +23,7 @@ module.exports = class Test {
 				},
 				{
 					key: 'setting',
-					type: 'bool'
+					type: 'json'
 				}
 			]
 
@@ -32,9 +32,9 @@ module.exports = class Test {
 	async run(msg, { configAction, configOption, setting }, error, other, parsed) {
 		if (error) {
 			msg.channel.send(error);
-			return console.log(`ERROR: ${error}\nParsed: ${parsed}`);
+			return console.log(`ERROR: ${error}\nParsed: \`\`\`json\n${JSON.stringify(parsed, null, 2)}\n\`\`\``);
 		}
-		switch (configAction) {
+		switch (configOption) {
 			case 'edit': {
 				return msg.channel.send('edit');
 			}
@@ -44,12 +44,14 @@ module.exports = class Test {
 			case 'reset': {
 				return msg.channel.send('reset');
 			}
+			case error: {
+				return msg.channel.send('Missing argument `configOption`');
+			}
 			default: {
-				if (configAction.error) return msg.channel.send('Error');
-				msg.channel.send('no arg provided');
+				if (configAction.error) return msg.channel.send('Missing argument `configOption`');
 			}
 		}
-		await msg.channel.send(`Action: ${configAction}\nOption: ${configOption}\nSetting: ${setting}\nOther: ${other}`);
+		await msg.channel.send(`Action: ${configAction}\nOption: ${configOption}\nSetting: ${JSON.stringify(setting)}\nOther:  \`\`\`json\n${JSON.stringify(other, null, 2)}\n\`\`\``);
 		return;
 	}
 
