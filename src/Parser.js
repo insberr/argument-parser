@@ -12,11 +12,13 @@ module.exports = class Parser {
 		this.client = client;
 		this.prefix = options?.prefix || null;
 	}
+
 	getCommandUsed(content, prefix, cmdConf) {
 		let usedReg = RegExp(`${prefix} *?(${cmdConf.name} *|${cmdConf.aliases.join(' *|')} *)`);
 		let usedCommand = content.match(usedReg);
 		return { usedReg: usedReg, usedCommand: usedCommand, cmdNoPrefix: usedCommand[1] };
 	}
+
 	regSplitter(content, usedReg) {
 		let newContent = content.replace(usedReg, '');
 		let splitBySpaces = newContent.split(/ /g);
