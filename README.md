@@ -6,6 +6,13 @@
 
 # argument-parser
 Discord bot command argument parser since none exist.  
+This was originally made for discord bots, however it could be used for anything.  
+The basic concept is as follows:  
+- Input JSON for the format you expect to be inputted along with the input
+- Get an output of the input parsed in the way specified by the JSON
+
+
+I plan to make this work for [Hiven](https://hiven.io) bots too.
 
 [Documentation]() (Not created yet [Looking for help on this])
 
