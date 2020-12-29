@@ -1,22 +1,23 @@
-> *Discord command argument parser*  
-> *Working progress*
+> *argument parser*  
+> **Status**: Working progress
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18&style=flat-square)](https://lgtm.com/projects/g/djs-tools/argument-parser/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18&style=flat-square)](https://lgtm.com/projects/g/djs-tools/argument-parser/context:javascript)
 
 # argument-parser
 Discord bot command argument parser since none exist.  
-This was originally made for discord bots, however it could be used for anything.  
+This project may become useless for Discord bots since the new slash commands feature.  
+
+
+This was originally made for Discord bots, however it could be used for anything.  
 The basic concept is as follows:  
 - Input JSON for the format you expect to be inputted along with the input
 - Get an output of the input parsed in the way specified by the JSON
 
 
-I plan to make this work for [Hiven](https://hiven.io) bots too.
-
 [Documentation]() (Not created yet [Looking for help on this])
 
-Requires Nodejs version 14.13.1 or higher
+Requires Nodejs version `14.15.3` or higher
 
 
 ## Parser Example
@@ -129,7 +130,7 @@ module.exports = class Test {
 ```
 
 ## Maintainers
-- [Insberr (AKA SpiderGamin)](https://github.com/Insberr/)
+- [Insberr](https://github.com/insberr/)
 
 
 ## License
