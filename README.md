@@ -1,5 +1,5 @@
 > *argument parser*  
-> **Status**: Working progress
+> **Status**: Not being worked on
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18&style=flat-square)](https://lgtm.com/projects/g/djs-tools/argument-parser/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18&style=flat-square)](https://lgtm.com/projects/g/djs-tools/argument-parser/context:javascript)
