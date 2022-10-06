@@ -1,8 +1,4 @@
-> *argument parser*  
-> **Status**: Not being worked on
-
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18&style=flat-square)](https://lgtm.com/projects/g/djs-tools/argument-parser/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/djs-tools/argument-parser.svg?logo=lgtm&logoWidth=18&style=flat-square)](https://lgtm.com/projects/g/djs-tools/argument-parser/context:javascript)
+## This is no longer needed because discord implemented slash commands
 
 # argument-parser
 Discord bot command argument parser since none exist.  
@@ -15,7 +11,7 @@ The basic concept is as follows:
 - Get an output of the input parsed in the way specified by the JSON
 
 
-[Documentation]() (Not created yet [Looking for help on this])
+[Documentation]() (Not created yet)
 
 Requires Nodejs version `14.15.3` or higher
 
@@ -130,7 +126,7 @@ module.exports = class Test {
 ```
 
 ## Maintainers
-- [Insberr](https://github.com/insberr/)
+- [insberr](https://github.com/insberr/)
 
 
 ## License

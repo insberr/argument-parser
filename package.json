@@ -10,7 +10,7 @@
 		"type": "git",
 		"url": "git+https://github.com/djs-tools/argument-parser.git"
 	},
-	"author": "Insberr",
+	"author": "insberr",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/djs-tools/argument-parser/issues"
