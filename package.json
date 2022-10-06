@@ -1,5 +1,5 @@
 {
-	"name": "argument-parser",
+	"name": "@djs-tools/argument-parser",
 	"version": "0.0.1",
 	"description": "Discord bot command argument parser. Splits the message into the needed arguments.",
 	"main": "index.js",
